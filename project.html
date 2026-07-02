@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant Food Ordering System</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#ffecd2,#fcb69f);
+}
+header{
+    background:#d62828;
+    color:white;
+    text-align:center;
+    padding:25px;
+    font-size:32px;
+    font-weight:bold;
+    letter-spacing:2px;
+    box-shadow:0px 5px 10px gray;
+}
+header p{
+    font-size:18px;
+    margin-top:8px;
+}
+.container{
+    width:90%;
+    margin:auto;
+    margin-top:30px;
+}
+section{
+    background:white;
+    margin-bottom:30px;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0px 8px 20px rgba(0,0,0,.2);
+}
+h2{
+    text-align:center;
+    color:#d62828;
+    margin-bottom:20px;
+}
+.menu{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+.card{
+    background:#fff8f0;
+    border-radius:15px;
+    text-align:center;
+    padding:20px;
+    transition:.4s;
+    border:2px solid #ffd6a5;
+}
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0px 10px 20px rgba(0,0,0,.3);
+}
+.card img{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    object-fit:cover;
+}
+.price{
+    color:green;
+    font-size:20px;
+    font-weight:bold;
+    margin:10px;
+}
+input[type="number"]{
+    width:70px;
+    padding:8px;
+    text-align:center;
+}
+.form-group{
+    margin-bottom:15px;
+}
+label{
+    font-weight:bold;
+}
+input,textarea{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    border-radius:8px;
+    border:1px solid gray;
+}
+textarea{
+    resize:none;
+}
+button{
+    width:100%;
+    padding:15px;
+    background:#d62828;
+    color:white;
+    border:none;
+    font-size:18px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.4s;
+}
+
+button:hover{
+    background:#8d0801;
+    transform:scale(1.02);
+}
+#summary{
+    background:#fff8dc;
+    padding:20px;
+    border-radius:10px;
+    min-height:100px;
+    font-size:18px;
+    line-height:35px;
+}
+.total{
+    color:red;
+    font-size:24px;
+    font-weight:bold;
+}
+.thank{
+    color:green;
+    font-size:22px;
+    text-align:center;
+    margin-top:20px;
+    font-weight:bold;
+}
+@media(max-width:700px){
+header{
+font-size:24px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+Royal Food Restaurant 
+<p>Delicious Food | Fast Delivery | Fresh Taste</p>
+</header>
+<div class="container">
+<section>
+<h2>Food Menu</h2>
+<div class="menu">
+<div class="card">
+<img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300" alt="Burger">
+<h3>Burger</h3>
+<p class="price">₹120</p>
+<label>
+<input type="checkbox" id="burger">
+ Select
+</label>
+<br><br>
+Qty
+<input type="number" id="burgerQty" min="1" value="1">
+</div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300">
+<h3>Pizza</h3>
+<p class="price">₹250</p>
+<label>
+<input type="checkbox" id="pizza">
+ Select
+</label>
+<br><br>
+Qty
+<input type="number" id="pizzaQty" min="1" value="1">
+</div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=300">
+<h3>Sandwich</h3>
+<p class="price">₹90</p>
+<label>
+<input type="checkbox" id="sandwich">
+Select
+</label>
+<br><br>
+Qty
+<input type="number" id="sandwichQty" min="1" value="1">
+</div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1576107232684-1279f390859f?w=300">
+<h3>Fries</h3>
+<p class="price">₹80</p>
+<label>
+<input type="checkbox" id="fries">
+Select
+</label>
+<br><br>
+Qty
+<input type="number" id="friesQty" min="1" value="1">
+</div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=300">
+<h3>Juice</h3>
+<p class="price">₹60</p>
+<label>
+<input type="checkbox" id="juice">
+Select
+</label>
+<br><br>
+Qty
+<input type="number" id="juiceQty" min="1" value="1">
+</div>
+</div>
+</section>
+<section>
+<h2> Customer Details</h2>
+<div class="form-group">
+<label>Name</label>
+<input type="text" id="name">
+</div>
+<div class="form-group">
+<label>Mobile Number</label>
+<input type="text" id="mobile">
+</div>
+<div class="form-group">
+<label>Address</label>
+<textarea rows="4" id="address"></textarea>
+</div>
+<button onclick="calculateBill()">
+Place Order
+</button>
+</section>
+<section>
+<h2>Order Summary</h2>
+<div id="summary">
+Your order will appear here...
+</div>
+
+</section>
+</div>
+<script>
+function calculateBill(){
+let name=document.getElementById("name").value.trim();
+let mobile=document.getElementById("mobile").value.trim();
+let address=document.getElementById("address").value.trim();
+if(name==""){
+alert("Enter Customer Name");
+return;
+}
+
+if(!/^[0-9]{10}$/.test(mobile)){
+alert("Enter Valid Mobile Number");
+return;
+}
+
+if(address==""){
+alert("Enter Address");
+return;
+}
+let items=[
+{
+name:"Burger",
+price:120,
+check:"burger",
+qty:"burgerQty"
+},
+{
+name:"Pizza",
+price:250,
+check:"pizza",
+qty:"pizzaQty"
+},
+{
+name:"Sandwich",
+price:90,
+check:"sandwich",
+qty:"sandwichQty"
+},
+{
+name:"Fries",
+price:80,
+check:"fries",
+qty:"friesQty"
+},
+{
+name:"Juice",
+price:60,
+check:"juice",
+qty:"juiceQty"
+}
+];
+
+let output="<h3>Customer : "+name+"</h3><br>";
+
+let total=0;
+
+let ordered=false;
+
+items.forEach(function(item){
+
+if(document.getElementById(item.check).checked){
+
+ordered=true;
+let qty=parseInt(document.getElementById(item.qty).value);
+let sub=qty*item.price;
+total+=sub;
+output+=item.name+" x "+qty+
+" = ₹"+sub+"<br>";
+
+}
+
+});
+
+if(!ordered){
+
+alert("Please Select Food Items");
+return;
+}
+output+="<hr>";
+output+="<div class='total'>Grand Total = ₹"+total+"</div>";
+output+="<div class='thank'>Thank You for Ordering! Visit Again</div>";
+document.getElementById("summary").innerHTML=output;
+}
+</script>
+</body>
+</html>
